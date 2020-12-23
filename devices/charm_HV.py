@@ -1,0 +1,91 @@
+#  -*- coding: utf-8 -*-
+#***************************************************************************
+#* Copyright (C) 2020 by Andreas Langhoff *
+#* <andreas.langhoff@frm2.tum.de> *
+#* This program is free software; you can redistribute it and/or modify *
+#* it under the terms of the GNU General Public License v3 as published *
+#* by the Free Software Foundation; *
+# **************************************************************************
+
+"""Intelligent Powersupply doing ramps etc."""
+
+from nicos import session
+from nicos.core import  Param,  listof, status, Readable, Override
+from nicos.devices.tango import StringIO
+from nicos.services.daemon.script import RequestError, ScriptRequest
+from nicos.core.utils import usermethod
+from nicos.core.params import Value
+from time import time as currenttime
+
+class CharmPowerSupply(StringIO,Readable):
+
+    parameters = {
+        'transitions': Param('transition choices as per entangle device configuration',
+                       type=listof(str)),
+
+    }
+
+    parameter_overrides = {
+        'pollinterval': Override(default=5),  # every 5 seconds
+    }
+
+
+
+
+    def doInit(self, mode):
+        n_items = 0
+        x = self.status()
+        if x[0] == status.OK:
+            n_items = self.availablelines
+        delays = []
+        cmds =[]
+        availabletransitions = []
+        for i in range(n_items):
+            delays.append(0)
+            cmd = "TR" + str(i)
+            cmds.append(cmd)
+            availabletransitions = self.multiCommunicate((delays,cmds))
+            self._setROParam('transitions',availabletransitions)
+        print(self.transitions)
+
+
+    def doShutdown(self):
+        pass
+
+    def read(self, maxage=0):
+        x = self.status()
+        self._cache.put(self, 'value', x[1], currenttime(), self.maxage)
+        # not put in the cache by Tango
+        return x[1]
+
+    def doRead(self, maxage=0):
+        return self.read(maxage)
+
+
+    @usermethod
+    def apply(self,*argv):
+        """
+        applies a transition from the 'transitions' parameter.
+        Function argument is index to item in the list.
+        """
+        if not len(argv):
+            index = -1
+        else:
+            index = argv[0]
+        if  index == -1:
+            msg = ''
+            for i in range(len(self.transitions)):
+                if i:
+                    msg += " ,"
+                msg += self.transitions[i] + " ("+str(i)+")"
+
+            print(msg)
+            print('please use 0 based index  as parameter. No action taken.')
+        else:
+            if (( len(self.transitions) > index ) and (index >= 0)):
+                cmd = 'APPLY:' + self.transitions[index]
+                print(cmd)
+                self.write(cmd)
+                print(self.transitions[index])
+            else:
+                print('index out of range. No action taken.')
