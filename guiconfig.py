@@ -1,4 +1,4 @@
-"""NICOS GUI configuration for ANTARES."""
+"""NICOS GUI configuration for ERWIN."""
 
 main_window = docked(
     vsplit(panel('nicos.clients.gui.panels.status.ScriptStatusPanel'),
