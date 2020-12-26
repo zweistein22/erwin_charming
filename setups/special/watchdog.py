@@ -19,7 +19,7 @@ watchlist = [
          type = 'critical',
          gracetime = 10,
     ),
- 
+
 ]
 
 includes = [

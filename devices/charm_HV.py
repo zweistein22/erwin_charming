@@ -16,13 +16,13 @@ from nicos.services.daemon.script import RequestError, ScriptRequest
 from nicos.core.utils import usermethod
 from nicos.core.params import Value
 from time import time as currenttime
+import copy
 
 class CharmPowerSupply(StringIO,Readable):
 
     parameters = {
         'transitions': Param('transition choices as per entangle device configuration',
                        type=listof(str)),
-
     }
 
     parameter_overrides = {
@@ -34,7 +34,7 @@ class CharmPowerSupply(StringIO,Readable):
 
     def doInit(self, mode):
         n_items = 0
-        x = self.status()
+        x = super().status()
         if x[0] == status.OK:
             n_items = self.availablelines
         delays = []
@@ -48,15 +48,26 @@ class CharmPowerSupply(StringIO,Readable):
             self._setROParam('transitions',availabletransitions)
         print(self.transitions)
 
-
     def doShutdown(self):
         pass
 
+
     def read(self, maxage=0):
-        x = self.status()
-        self._cache.put(self, 'value', x[1], currenttime(), self.maxage)
-        # not put in the cache by Tango
-        return x[1]
+        s = super().status(maxage)
+        sv = self.status_value(s[1])
+        return sv[1]
+
+
+
+    def status_value(self,s1):
+        val = ''
+        sta = ''
+        i = s1.rfind('[')
+        if i >=0:
+            val = s1[i:]
+            sta = s1[:i-1]
+            self._cache.put(self, 'value', val, currenttime(), self.maxage)
+        return (sta,val)
 
     def doRead(self, maxage=0):
         return self.read(maxage)

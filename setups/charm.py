@@ -29,7 +29,7 @@ devices = dict(
         pollinterval = 3,
         maxage = 4,
     ),
-    histogram = device('nicos.devices.tango.BaseImageChannel',
+    histogram = device('nicos.devices.tango.ImageChannel',
         description = 'Histogram image  from the device',
         tangodevice = tango_base + 'Histogram',
         pollinterval = 3,

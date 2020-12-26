@@ -14,8 +14,6 @@ sysconfig = dict(
 modules = ['nicos.commands.standard']
 
 
-tango_base = 'tango://ictrlfs.ictrl.frm2.tum.de:10000/test/ERWIN-detector/'
-
 devices = dict(
     Erwin = device('nicos.devices.instrument.Instrument',
         description = 'Erwin-charming',
