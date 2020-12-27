@@ -44,10 +44,10 @@ devices = dict(
     ),
     LogSpace = device('nicos.devices.generic.FreeSpace',
         description = 'Space on log drive',
-        path = 'log',
+        path = '/',
         warnlimits = (.5, None),
         minfree = 0.5,
-        lowlevel = True,
+        lowlevel = False,
     ),
 
 
