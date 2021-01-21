@@ -6,14 +6,14 @@ main_window = docked(
              panel('nicos.clients.gui.panels.status.ScriptStatusPanel'),
              #panel('nicos.clients.gui.panels.watch.WatchPanel'),
              panel('nicos.clients.gui.panels.console.ConsolePanel',
-                 watermark='nicos_mlz/antares/gui/watermark.png'),
+                 watermark='nicos_mlz/erwin-charming/gui/watermark.png'),
          ),
          ),
     ),
     ('Experiment info',
      panel('nicos.clients.gui.panels.expinfo.ExpInfoPanel')),
     ('NICOS devices',
-     panel('nicos_mlz.erwin-charming.gui.clients.panels.devices.DevicesPanel1', icons=True,
+     panel('nicos_mlz.erwin_charming.gui.clients.panels.devices.DevicesPanel1', icons=True,
            dockpos='right',)
     ),
 )
@@ -46,7 +46,7 @@ windows = [
 
 tools = [
     tool('Downtime report', 'nicos.clients.gui.tools.downtime.DownTimeTool',
-         sender='antares@frm2.tum.de',
+         sender='erwin@frm2.tum.de',
     ),
     tool('Calculator', 'nicos.clients.gui.tools.calculator.CalculatorTool'),
     tool('Neutron cross-sections',

@@ -2,7 +2,7 @@ from nicos.clients.gui.panels.devices import DevicesPanel, DEVICE_TYPE
 from nicos.guisupport.qt import QMenu,  pyqtSlot, QAction
 from functools import partial
 
-charmpowersupply  = 'nicos_mlz.erwin-charming.devices.charm_HV.CharmPowerSupply' #c p s
+charmpowersupply  = 'nicos_mlz.erwin_charming.devices.charm_HV.CharmPowerSupply' #c p s
 
 class DevicesPanel1(DevicesPanel):
 

@@ -7,7 +7,7 @@
 #* by the Free Software Foundation; *
 # **************************************************************************
 
-"""Intelligent RoiManager using polygons.(extendible to out ring / inner ring polygons)"""
+"""Intelligent RoiManager using polygons.(extendible to outer ring / inner ring polygons)"""
 import json
 from nicos import session
 from nicos.core import  Param,  listof, status, Readable, Override
@@ -19,6 +19,9 @@ from time import time as currenttime
 
 class RoiManager(StringIO,Readable):
 
+    parameters = {
+        'backgroundimage': Param('backgroundimage',type=str),
+    }
 
     parameter_overrides = {
         'pollinterval': Override(default=5),  # every 5 seconds
@@ -56,7 +59,7 @@ class RoiManager(StringIO,Readable):
         msg += ']' + ' energy unit cts'
         self._cache.put(self, 'value', msg, currenttime(), self.maxage)
         # not put in the cache by Tango
-        return x[1]
+        return msg
 
     def doRead(self, maxage=0):
         return self.read(maxage)

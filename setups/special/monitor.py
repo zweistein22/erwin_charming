@@ -23,6 +23,11 @@ _expcolumn = Column(
                 ),
                 Field(name = 'Last file', key = 'exp/lastscan'),
             ),
+            '---',
+            BlockRow(
+                Field(name='Histogram', picture='bin/data/live_lin.png', refresh=2,
+                      width=30, height=30),
+                 )
         ],
     ),
 )

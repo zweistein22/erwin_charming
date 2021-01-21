@@ -52,7 +52,7 @@ class Settings(StringIO,Readable):
         msg = json.dumps(all)
         self._cache.put(self, 'value', msg, currenttime(), self.maxage)
         # not put in the cache by Tango
-        return x[1]
+        return msg
 
     def doRead(self, maxage=0):
         return self.read(maxage)

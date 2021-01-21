@@ -1,11 +1,11 @@
-description = 'charm detector'
+description = 'listmode replay'
 group = 'lowlevel'
 
 
-tango_base = 'tango://ictrlfs.ictrl.frm2.tum.de:10000/test/ERWIN-detector/'
+tango_base = 'tango://ictrlfs.ictrl.frm2.tum.de:10000/test/ERWIN-replay/'
 
 sysconfig = dict(
-    datasinks = ['LivePNGSink']
+    datasinks = ['LivePNGSink2']
 )
 
 devices = dict(
@@ -35,7 +35,7 @@ devices = dict(
         pollinterval = 3,
         maxage = 4,
     ),
-     LivePNGSink = device('nicos_mlz.erwin_charming.devices.datasinks.PNGLiveFileSinkF',
+     LivePNGSink2 = device('nicos_mlz.erwin_charming.devices.datasinks.PNGLiveFileSinkF',
         description = 'Saves live image as .png every now and then',
         filename = '../bin/data/live_lin.png',
         rgb = True,
@@ -50,15 +50,16 @@ devices = dict(
         maxage = 4,
         backgroundimage = 'histogram'
    ),
-    settings = device('nicos_mlz.erwin_charming.devices.settings.Settings',
-        description = 'Settings manager',
-        tangodevice = tango_base + 'Settings',
-        pollinterval = 3,
-        maxage = 4,
+    playlistmanager = device('nicos_mlz.erwin_charming.devices.playlist.Manager',
+        description = 'PlayList manager',
+        tangodevice = tango_base + 'PlayList',
+        pollinterval = 10,
+        maxage = 8,
    ),
+
 )
 
 startupcode = '''
-SetDetectors(charm)
-LivePNGSink.size = histogram.size[0]
+SetDetectors(listmode)
+LivePNGSink2.size = 128
 '''
