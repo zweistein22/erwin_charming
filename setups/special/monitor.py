@@ -26,7 +26,7 @@ _expcolumn = Column(
             '---',
             BlockRow(
                 Field(name='Histogram', picture='bin/data/live_lin.png', refresh=2,
-                      width=30, height=30),
+                      width=60, height=30),
                  )
         ],
     ),

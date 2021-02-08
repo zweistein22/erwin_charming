@@ -1,8 +1,11 @@
 from nicos.clients.gui.panels.devices import DevicesPanel, DEVICE_TYPE
-from nicos.guisupport.qt import QMenu,  pyqtSlot, QAction
+from nicos.guisupport.qt import QMenu,  pyqtSlot, QAction, QWidget, QDialog, QPushButton, uic, QImage, QTextCharFormat, QPainter
 from functools import partial
+import nicos_mlz.erwin_charming.gui.clients.panels.roieditor as roieditor
 
 charmpowersupply  = 'nicos_mlz.erwin_charming.devices.charm_HV.CharmPowerSupply' #c p s
+roimanager = 'nicos_mlz.erwin_charming.devices.roimanager.RoiManager'
+
 
 class DevicesPanel1(DevicesPanel):
 
@@ -35,7 +38,34 @@ class DevicesPanel1(DevicesPanel):
                  self.cpsmenu.addAction(self.actionHelp)
                  self.cpsmenu.popup(self.tree.viewport().mapToGlobal(point))
                  return
+
+            if roimanager in self._devinfo[ldevname].classes:
+                 params = self.client.getDeviceParams(ldevname)
+                 self.cpsmenu = QMenu()
+                 self.cps_actions = []
+                 self.cps_actions.append(QAction('Edit...'))
+                 self.cpsmenu.addAction(self.cps_actions[0])
+                 self.cps_actions[0].triggered.connect(partial(self.on_roimanagerEdit,ldevname))
+                 self.cpsmenu.addSeparator()
+                 self.cpsmenu.addAction(self.actionMove)
+                 self.cpsmenu.addAction(self.actionReset)
+                 self.cpsmenu.addSeparator()
+                 if self.mainwindow.history_wintype is not None:
+                     self.cpsmenu.addAction(self.actionPlotHistory)
+                 self.cpsmenu.addSeparator()
+                 self.cpsmenu.addAction(self.actionShutDown)
+                 self.cpsmenu.addAction(self.actionHelp)
+                 self.cpsmenu.popup(self.tree.viewport().mapToGlobal(point))
+                 return
+
         return super().on_tree_customContextMenuRequested( point)
+
+    @pyqtSlot()
+    def on_roimanagerEdit(self,ldevname):
+        if not roieditor.win:
+            roieditor.win = roieditor.Window(self.client,ldevname)
+            roieditor.win.show()
+
 
 
     @pyqtSlot()

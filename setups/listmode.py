@@ -61,5 +61,5 @@ devices = dict(
 
 startupcode = '''
 SetDetectors(listmode)
-LivePNGSink2.size = 128
+LivePNGSink2.size = 512
 '''

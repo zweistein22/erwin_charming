@@ -37,7 +37,7 @@ devices = dict(
     ),
      LivePNGSink = device('nicos_mlz.erwin_charming.devices.datasinks.PNGLiveFileSinkF',
         description = 'Saves live image as .png every now and then',
-        filename = '../bin/data/live_lin.png',
+        filename = 'bin/data/live_lin.png',
         rgb = True,
         log10 = False,
         flipy = False,
