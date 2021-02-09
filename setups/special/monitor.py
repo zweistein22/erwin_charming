@@ -1,3 +1,6 @@
+import nicos_mlz.erwin_charming.nicospath as nicospath
+
+
 description = 'setup for the status monitor'
 group = 'special'
 
@@ -25,7 +28,7 @@ _expcolumn = Column(
             ),
             '---',
             BlockRow(
-                Field(name='Histogram', picture='bin/data/live_lin.png', refresh=2,
+                Field(name='Histogram', picture=nicospath.NicosPath.live_png(), refresh=2,
                       width=60, height=30),
                  )
         ],

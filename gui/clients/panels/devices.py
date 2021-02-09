@@ -1,3 +1,13 @@
+#  -*- coding: utf-8 -*-
+#***************************************************************************
+#* Copyright (C) 2020 by Andreas Langhoff *
+#* <andreas.langhoff@frm2.tum.de> *
+#* This program is free software; you can redistribute it and/or modify *
+#* it under the terms of the GNU General Public License v3 as published *
+#* by the Free Software Foundation; *
+# **************************************************************************
+
+
 from nicos.clients.gui.panels.devices import DevicesPanel, DEVICE_TYPE
 from nicos.guisupport.qt import QMenu,  pyqtSlot, QAction, QWidget, QDialog, QPushButton, uic, QImage, QTextCharFormat, QPainter
 from functools import partial

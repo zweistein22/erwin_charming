@@ -1,3 +1,13 @@
+#  -*- coding: utf-8 -*-
+#***************************************************************************
+#* Copyright (C) 2020 by Andreas Langhoff *
+#* <andreas.langhoff@frm2.tum.de> *
+#* This program is free software; you can redistribute it and/or modify *
+#* it under the terms of the GNU General Public License v3 as published *
+#* by the Free Software Foundation; *
+# **************************************************************************
+
+
 from nicos.guisupport.qt import QMenu, pyqtSlot, QAction, QWidget, QDialog, QPushButton
 from nicos.guisupport.qt import Qt, QPen, uic, QImage, QTextCharFormat, QPainter, QBrush, QColor
 import nicos_mlz.erwin_charming.gui.clients.panels.polygon as polygon

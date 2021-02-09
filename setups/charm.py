@@ -1,3 +1,5 @@
+import nicos_mlz.erwin_charming.nicospath as nicospath
+
 description = 'charm detector'
 group = 'lowlevel'
 
@@ -37,7 +39,7 @@ devices = dict(
     ),
      LivePNGSink = device('nicos_mlz.erwin_charming.devices.datasinks.PNGLiveFileSinkF',
         description = 'Saves live image as .png every now and then',
-        filename = 'bin/data/live_lin.png',
+        filename = nicospath.NicosPath.live_png(),
         rgb = True,
         log10 = False,
         flipy = False,

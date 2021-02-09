@@ -3,6 +3,7 @@ import os
 import importlib.util
 import importlib.machinery
 
+
 def main():
     os.environ["INSTRUMENT"] = "nicos_mlz.erwin_charming"
     print("INSTRUMENT="+os.environ["INSTRUMENT"])
