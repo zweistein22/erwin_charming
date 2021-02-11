@@ -1,5 +1,4 @@
 __pycache__/
-*.sln
 .vs/
 *.rsuser
 *.suo
@@ -8,3 +7,4 @@ __pycache__/
 *.sln.docstates
 *.sln
 *.filters
+VSWorkspaceState.json
