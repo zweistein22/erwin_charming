@@ -1,1 +1,10 @@
 __pycache__/
+*.sln
+.vs/
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sln
+*.filters
