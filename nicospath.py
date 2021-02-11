@@ -14,7 +14,9 @@ class NicosPath:
  @staticmethod
  def live_png():
      lvg =  os.path.join(NicosPath.root(),'bin/data/live_lin.png')
-     return lvg.replace(os.sep,'/')
+     lvg_1 = lvg.replace(os.sep,'/')
+     print('live_png() = '+lvg_1)
+     return lvg_1
 
 
 

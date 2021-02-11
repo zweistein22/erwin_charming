@@ -4,7 +4,6 @@ from nicos.devices.datasinks.livepng import *
 
 class  PNGLiveFileSinkHandlerF(PNGLiveFileSinkHandler):
       def _writeData(self, data):
-        self.log.warning('destination:'+self.sink.filename, exc=1)
         image = np.asarray(data)
         max_pixel = image.max()
         if self.sink.log10:
