@@ -6,7 +6,6 @@
 #* it under the terms of the GNU General Public License v3 as published *
 #* by the Free Software Foundation; *
 # **************************************************************************
-
 """Settings read / write for charm devices"""
 import json
 from nicos import session
@@ -30,7 +29,7 @@ class Settings(StringIO,Readable):
     def available(self):
         n_items = self.availablelines
         delays = []
-        cmds =[]
+        cmds = []
         rois = []
         for i in range(n_items):
             delays.append(0)
@@ -83,7 +82,7 @@ class Settings(StringIO,Readable):
                                  tok[1] = 'True'
                              if tok[1] == 'false':
                                  tok[1] = 'False'
-                             cmd = tok[0]+":"+tok[1]
+                             cmd = tok[0] + ":" + tok[1]
                              return self.communicate(cmd)
 
                      return rd

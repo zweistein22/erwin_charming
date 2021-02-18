@@ -7,13 +7,12 @@
 #* by the Free Software Foundation; *
 # **************************************************************************
 
-
 from nicos.clients.gui.panels.devices import DevicesPanel, DEVICE_TYPE
 from nicos.guisupport.qt import QMenu,  pyqtSlot, QAction, QWidget, QDialog, QPushButton, uic, QImage, QTextCharFormat, QPainter
 from functools import partial
 import nicos_mlz.erwin_charming.gui.clients.panels.roieditor as roieditor
 
-charmpowersupply  = 'nicos_mlz.erwin_charming.devices.charm_HV.CharmPowerSupply' #c p s
+charmpowersupply = 'nicos_mlz.erwin_charming.devices.charm_HV.CharmPowerSupply' #c p s
 roimanager = 'nicos_mlz.erwin_charming.devices.roimanager.RoiManager'
 
 
@@ -68,7 +67,7 @@ class DevicesPanel1(DevicesPanel):
                  self.cpsmenu.popup(self.tree.viewport().mapToGlobal(point))
                  return
 
-        return super().on_tree_customContextMenuRequested( point)
+        return super().on_tree_customContextMenuRequested(point)
 
     @pyqtSlot()
     def on_roimanagerEdit(self,ldevname):
@@ -81,7 +80,7 @@ class DevicesPanel1(DevicesPanel):
     @pyqtSlot()
     def on_actionApply_triggered(self,index):
         if self._menu_dev:
-            self.client.eval(self._menu_dev+'.apply('+str(index)+')')
+            self.client.eval(self._menu_dev + '.apply(' + str(index) + ')')
 
     def on_client_cache(self, data):
         rv = super().on_client_cache(data)
@@ -101,15 +100,15 @@ class DevicesPanel1(DevicesPanel):
             if subkey == 'status':
                  t = devitem.text(2)
                  i = t.rfind('[')
-                 if i >=0:
-                     t = t[:i-1]
+                 if i >= 0:
+                     t = t[:i - 1]
                  devitem.setText(2,str(t))
             if ldevname in self._control_dialogs:
                     dlg = self._control_dialogs[ldevname]
                     ct = dlg.statuslabel.text()
                     i = ct.rfind('[')
-                    if i >=0:
-                        ct = ct[:i-1]
+                    if i >= 0:
+                        ct = ct[:i - 1]
                     dlg.statuslabel.setText(ct)
 
         return rv

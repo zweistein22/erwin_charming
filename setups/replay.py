@@ -6,9 +6,7 @@ includes = ['listmode']
 
 excludes = []
 
-devices = dict(
-
-    listmode = device('nicos.devices.generic.detector.Detector',
+devices = dict(listmode = device('nicos.devices.generic.detector.Detector',
         description = 'Charm or Mesytec 2D Neutron listmode replay',
         timers = ['timer'],
         counters = ['counter'],
@@ -16,8 +14,5 @@ devices = dict(
         images = ['histogram'],
         liveinterval = 1.0,
         pollinterval = 1,
-        maxage = 1,
-    ),
-
-)
+        maxage = 1,),)
 

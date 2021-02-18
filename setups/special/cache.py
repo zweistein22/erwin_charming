@@ -1,11 +1,9 @@
 description = 'setup for the cache server'
 group = 'special'
 
-devices = dict(
-    DB = device('nicos.services.cache.server.FlatfileCacheDatabase',
+devices = dict(DB = device('nicos.services.cache.server.FlatfileCacheDatabase',
         storepath = 'bin/data/cache',
-        loglevel = 'info',
-    ),
+        loglevel = 'info',),
     Server = device('nicos.services.cache.server.CacheServer',
         db = 'DB',
         # 'localhost' will normally bind the cache service to the
@@ -19,6 +17,4 @@ devices = dict(
         # some other NICOS services are running on different
         # machines
         server = 'localhost',
-        loglevel = 'info',
-    ),
-)
+        loglevel = 'info',),)

@@ -6,7 +6,6 @@
 #* it under the terms of the GNU General Public License v3 as published *
 #* by the Free Software Foundation; *
 # **************************************************************************
-
 """Intelligent RoiManager using polygons.(extendible to outer ring / inner ring polygons)"""
 import json
 from nicos import session
@@ -35,7 +34,7 @@ class RoiManager(StringIO,Readable):
     def roidata(self):
         n_items = self.availablelines
         delays = []
-        cmds =[]
+        cmds = []
         rois = []
         for i in range(n_items):
             delays.append(0)
@@ -55,7 +54,7 @@ class RoiManager(StringIO,Readable):
                 msg += ', '
             roidata = json.loads(rd)
             msg += str(roidata[1])
-            i = i+1
+            i = i + 1
         msg += ']' + ' energy unit cts'
         self._cache.put(self, 'value', msg, currenttime(), self.maxage)
         # not put in the cache by Tango
@@ -84,7 +83,7 @@ class RoiManager(StringIO,Readable):
                 index = int(istr)
             maxindex = len(roidata)
             if len(tok) >= 2:
-                maxindex = maxindex+1
+                maxindex = maxindex + 1
 
             if index >= maxindex or index < 0:
 

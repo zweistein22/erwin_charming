@@ -6,7 +6,7 @@ import importlib.machinery
 
 def main():
     os.environ["INSTRUMENT"] = "nicos_mlz.erwin_charming"
-    print("INSTRUMENT="+os.environ["INSTRUMENT"])
+    print("INSTRUMENT=" + os.environ["INSTRUMENT"])
     argmusthave = "--other-instruments"
     if argmusthave not in sys.argv:
         sys.argv.append(argmusthave)
@@ -17,7 +17,7 @@ def main():
     reldir = "bin"
     dname = os.path.join(nicos_root,reldir)
     os.chdir(dname)
-    print("running in dir: "+dname)
+    print("running in dir: " + dname)
     fullpath = os.path.join(dname,startupfile)
 
 

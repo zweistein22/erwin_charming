@@ -6,7 +6,6 @@
 #* it under the terms of the GNU General Public License v3 as published *
 #* by the Free Software Foundation; *
 # **************************************************************************
-
 """Playlist Manager"""
 import json
 from nicos import session
@@ -41,7 +40,7 @@ class Manager(StringIO,Readable):
         return self.read(maxage)
 
     def internCommunicate(self, name, arg):
-        stringio = name+':'+'["'+arg+'"]'
+        stringio = name + ':' + '["' + arg + '"]'
         rv = self.communicate(stringio)
         return rv
 

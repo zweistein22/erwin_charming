@@ -1,35 +1,24 @@
 """NICOS GUI configuration for ERWIN."""
 
-main_window = docked(
-    tabbed(
-        ('Console', vsplit(
-             panel('nicos.clients.gui.panels.status.ScriptStatusPanel'),
+main_window = docked(tabbed(('Console', vsplit(panel('nicos.clients.gui.panels.status.ScriptStatusPanel'),
              #panel('nicos.clients.gui.panels.watch.WatchPanel'),
              panel('nicos.clients.gui.panels.console.ConsolePanel',
-                 watermark='nicos_mlz/erwin-charming/gui/watermark.png'),
-         ),
-         ),
-    ),
+                 watermark='nicos_mlz/erwin-charming/gui/watermark.png'),),),),
     ('Experiment info',
      panel('nicos.clients.gui.panels.expinfo.ExpInfoPanel')),
     ('NICOS devices',
      panel('nicos_mlz.erwin_charming.gui.clients.panels.devices.DevicesPanel1', icons=True,
-           dockpos='right',)
-    ),
-)
+           dockpos='right',)),)
 
-windows = [
-    window('Setup', 'setup',
+windows = [window('Setup', 'setup',
            tabbed(('Experiment',
                    panel('nicos.clients.gui.panels.setup_panel.ExpPanel')),
                   ('Setups',
                    panel('nicos.clients.gui.panels.setup_panel.SetupsPanel')),
                   ('Detectors/Environment',
-                   panel('nicos.clients.gui.panels.setup_panel.DetEnvPanel')),
-            )),
+                   panel('nicos.clients.gui.panels.setup_panel.DetEnvPanel')),)),
     window('Editor', 'editor',
-           vsplit(
-               panel('nicos.clients.gui.panels.scriptbuilder.CommandsPanel'),
+           vsplit(panel('nicos.clients.gui.panels.scriptbuilder.CommandsPanel'),
                panel('nicos.clients.gui.panels.editor.EditorPanel'))),
     window('Scans', 'plotter',
            panel('nicos.clients.gui.panels.scans.ScansPanel')),
@@ -41,13 +30,10 @@ windows = [
            panel('nicos.clients.gui.panels.errors.ErrorPanel')),
     window('Live data', 'live',
            panel('nicos.clients.gui.panels.live.LiveDataPanel',
-                 instrument = 'imaging')),
-]
+                 instrument = 'imaging')),]
 
-tools = [
-    tool('Downtime report', 'nicos.clients.gui.tools.downtime.DownTimeTool',
-         sender='erwin@frm2.tum.de',
-    ),
+tools = [tool('Downtime report', 'nicos.clients.gui.tools.downtime.DownTimeTool',
+         sender='erwin@frm2.tum.de',),
     tool('Calculator', 'nicos.clients.gui.tools.calculator.CalculatorTool'),
     tool('Neutron cross-sections',
          'nicos.clients.gui.tools.website.WebsiteTool',
@@ -57,5 +43,4 @@ tools = [
     tool('Neutron calculations', 'nicos.clients.gui.tools.website.WebsiteTool',
          url='https://webapps.frm2.tum.de/intranet/neutroncalc/'),
     tool('Report NICOS bug or request enhancement',
-         'nicos.clients.gui.tools.bugreport.BugreportTool'),
-]
+         'nicos.clients.gui.tools.bugreport.BugreportTool'),]

@@ -6,7 +6,6 @@
 #* it under the terms of the GNU General Public License v3 as published *
 #* by the Free Software Foundation; *
 # **************************************************************************
-
 """Intelligent Powersupply doing ramps etc."""
 
 from nicos import session
@@ -38,7 +37,7 @@ class CharmPowerSupply(StringIO,Readable):
         if x[0] == status.OK:
             n_items = self.availablelines
         delays = []
-        cmds =[]
+        cmds = []
         availabletransitions = []
         for i in range(n_items):
             delays.append(0)
@@ -63,9 +62,9 @@ class CharmPowerSupply(StringIO,Readable):
         val = ''
         sta = ''
         i = s1.rfind('[')
-        if i >=0:
+        if i >= 0:
             val = s1[i:]
-            sta = s1[:i-1]
+            sta = s1[:i - 1]
             self._cache.put(self, 'value', val, currenttime(), self.maxage)
         return (sta,val)
 
@@ -88,12 +87,12 @@ class CharmPowerSupply(StringIO,Readable):
             for i in range(len(self.transitions)):
                 if i:
                     msg += " ,"
-                msg += self.transitions[i] + " ("+str(i)+")"
+                msg += self.transitions[i] + " (" + str(i) + ")"
 
             print(msg)
             print('please use 0 based index  as parameter. No action taken.')
         else:
-            if (( len(self.transitions) > index ) and (index >= 0)):
+            if ((len(self.transitions) > index) and (index >= 0)):
                 cmd = 'APPLY:' + self.transitions[index]
                 print(cmd)
                 self.write(cmd)

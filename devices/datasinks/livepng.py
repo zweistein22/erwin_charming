@@ -36,12 +36,12 @@ class  PNGLiveFileSinkHandlerF(PNGLiveFileSinkHandler):
                 hist,bins = np.histogram(norm_arr.flatten(),1024)
                 cdf = hist.cumsum()
                 cdf_normalized = cdf.astype(float) / cdf.max()
-                minval = bins[np.argmax(cdf_normalized>self.sink.histrange[0])]
-                maxval = bins[np.argmax(cdf_normalized>self.sink.histrange[1])]
+                minval = bins[np.argmax(cdf_normalized > self.sink.histrange[0])]
+                maxval = bins[np.argmax(cdf_normalized > self.sink.histrange[1])]
                 delta = maxval - minval
                 if delta == 0:
                     delta = 1
-                img = (norm_arr - minval) / (delta)*255.
+                img = (norm_arr - minval) / (delta) * 255.
                 # Our origin is bottom left, but image origin is top left
                 if self.sink.flipy:
                     img = np.flipud(img)

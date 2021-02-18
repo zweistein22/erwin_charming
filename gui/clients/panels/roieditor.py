@@ -7,7 +7,6 @@
 #* by the Free Software Foundation; *
 # **************************************************************************
 
-
 from nicos.guisupport.qt import QMenu, pyqtSlot, QAction, QWidget, QDialog, QPushButton
 from nicos.guisupport.qt import Qt, QPen, uic, QImage, QTextCharFormat, QPainter, QBrush, QColor
 import nicos_mlz.erwin_charming.gui.clients.panels.polygon as polygon
@@ -115,8 +114,8 @@ class Window(QWidget):
     @pyqtSlot()
     def on_writeWKT_clicked(self):
         wkt = str(self.wktText.toPlainText())
-        arg = 'ROI'+str(self.polylistindex - 1)+':'+wkt
-        jcurwkt = self.client.eval(self.ldevname+".roi('"+arg+"')")
+        arg = 'ROI' + str(self.polylistindex - 1) + ':' + wkt
+        jcurwkt = self.client.eval(self.ldevname + ".roi('" + arg + "')")
         if wkt != "":
             self.on_readWKT_clicked()
 
@@ -126,8 +125,8 @@ class Window(QWidget):
         self.noredrawblack = True
         self.tf.setForeground(QBrush(Qt.red))
         self.wktText.setCurrentCharFormat(self.tf)
-        arg = 'ROI'+str(self.polylistindex - 1)
-        jcurwkt = self.client.eval(self.ldevname+".roi('"+arg+"')")
+        arg = 'ROI' + str(self.polylistindex - 1)
+        jcurwkt = self.client.eval(self.ldevname + ".roi('" + arg + "')")
         if not jcurwkt:
             self.wktText.setPlainText('')
         else:
@@ -178,8 +177,8 @@ class Window(QWidget):
         if event.key() == Qt.Key_Escape:
             if self.ineditroi is True:
                 if self.polylistindex > 1:
-                     arg = 'ROI'+str(self.polylistindex - 1)+':'
-                     jcurwkt = self.client.eval(self.ldevname+".roi('"+arg+"')")
+                     arg = 'ROI' + str(self.polylistindex - 1) + ':'
+                     jcurwkt = self.client.eval(self.ldevname + ".roi('" + arg + "')")
                      self.removePolygon(self.polylistindex - 1)
 
             #self.wktText.setPlainText("")
@@ -219,9 +218,10 @@ class Window(QWidget):
 
         if shape[0] > 1 and shape[1] > 1:
             img = cv.normalize(np.int32(self.mat), None, 0, 255, norm_type=cv.NORM_MINMAX, dtype=cv.CV_8U)
-            #cv.normalize need an image with x and y > 1: It gives best normalization also with high counts per pixel
+            #cv.normalize need an image with x and y > 1: It gives best
+            #normalization also with high counts per pixel
         else:
-            img = (self.mat*255 /max(1, np.amax(val))).astype(np.uint8)
+            img = (self.mat * 255 / max(1, np.amax(val))).astype(np.uint8)
 
         if self.filter1.isChecked():
             #https://docs.opencv.org/3.4/d5/daf/tutorial_py_histogram_equalization.html
