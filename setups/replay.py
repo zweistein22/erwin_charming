@@ -11,7 +11,7 @@ devices = dict(listmode = device('nicos.devices.generic.detector.Detector',
         timers = ['timer'],
         counters = ['counter'],
         monitors =['monitor0'],
-        images = ['histogram'],
+        images = ['histogram','histogramraw'],
         liveinterval = 1.0,
         pollinterval = 1,
         maxage = 1,),)

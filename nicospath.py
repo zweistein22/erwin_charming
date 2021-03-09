@@ -25,3 +25,9 @@ class NicosPath:
      lvg_1 = lvg.replace(os.sep,'/')
      print('live2_png() = ' + lvg_1)
      return lvg_1
+
+ @staticmethod
+ def data_dir():
+     lvg = os.path.join(NicosPath.root(),'bin/data')
+     lvg_1 = lvg.replace(os.sep,'/')
+     return lvg_1

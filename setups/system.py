@@ -1,3 +1,6 @@
+
+import nicos_mlz.erwin_charming.nicospath as nicospath
+
 description = 'system setup'
 
 group = 'lowlevel'
@@ -23,7 +26,7 @@ devices = dict(Erwin = device('nicos.devices.instrument.Instrument',
         description =  'The currently used sample',),
     Exp = device('nicos.devices.experiment.Experiment',
         description = 'experiment object',
-        dataroot = 'data',
+        dataroot = nicospath.NicosPath.data_dir(),
         sendmail = False,
         serviceexp = 'service',
         sample = 'Sample',),

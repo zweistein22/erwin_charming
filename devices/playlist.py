@@ -39,6 +39,12 @@ class Manager(StringIO,Readable):
     def doRead(self, maxage=0):
         return self.read(maxage)
 
+    def doStatus(self, maxage=0):
+        state = super().doStatus(maxage)
+        if not len(state[1]):
+             return (WARN, state[1])
+        return state
+
     def internCommunicate(self, name, arg):
         stringio = name + ':' + '["' + arg + '"]'
         rv = self.communicate(stringio)

@@ -8,7 +8,7 @@
 # **************************************************************************
 import re
 from nicos.core.status import BUSY
-from nicos.devices.tango import TimerChannel, CounterChannel
+from nicos.devices.tango import TimerChannel, CounterChannel, ImageChannel
 
 
 def isdaqrunning(state1:str):
@@ -34,4 +34,11 @@ class CharmCounterChannel(CounterChannel):
         if isdaqrunning(state[1]):
              return (BUSY, state[1])
         return state
+
+class CharmImageChannel(ImageChannel):
+    def doPrepare(self):
+        super().doPrepare()
+        res = []
+        res.append(0)
+        self.readresult = res
 
