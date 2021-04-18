@@ -75,5 +75,5 @@ devices = dict(timer = device('nicos_mlz.erwin_charming.devices.detector.CharmTi
 
 startupcode = '''
 SetDetectors(charm)
-LivePNGSink.size = histogram.size[0]
+LivePNGSink.size = 512
 '''

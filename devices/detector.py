@@ -7,6 +7,7 @@
 #* by the Free Software Foundation; *
 # **************************************************************************
 import re
+import time
 from nicos.core.status import BUSY
 from nicos.devices.tango import TimerChannel, CounterChannel, ImageChannel
 
@@ -26,6 +27,15 @@ class CharmTimerChannel(TimerChannel):
         if isdaqrunning(state[1]):
              return (BUSY, state[1])
         return state
+
+    def doStart(self):
+       # time.sleep(0.5)
+        super().doStart()
+
+ #   def doStop(self):
+ #       super.doStop()
+
+
 
 
 class CharmCounterChannel(CounterChannel):
