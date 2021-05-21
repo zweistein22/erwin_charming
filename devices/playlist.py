@@ -22,12 +22,15 @@ class Manager(StringIO,Readable):
     parameter_overrides = {
         'pollinterval': Override(default=15),  # every 5 seconds
     }
-
+    # pylint: disable=C:invalid-name
     def doInit(self, mode):
         pass
+
+    # pylint: disable=C:invalid-name
     def doShutdown(self):
         pass
 
+    # pylint: disable=unused-argument
     def read(self, maxage=0):
 
         rois = self.addfile("")
@@ -36,15 +39,19 @@ class Manager(StringIO,Readable):
         # not put in the cache by Tango
         return msg
 
+    # pylint: disable=C:invalid-name
     def doRead(self, maxage=0):
         return self.read(maxage)
 
+    # pylint: disable=C:invalid-name
     def doStatus(self, maxage=0):
         state = super().doStatus(maxage)
+        # pylint: disable=C:len-as-condition
         if not len(state[1]):
-             return (WARN, state[1])
+            return (WARN, state[1])
         return state
 
+    # pylint: disable=C:invalid-name
     def internCommunicate(self, name, arg):
         stringio = name + ':' + '["' + arg + '"]'
         rv = self.communicate(stringio)
@@ -55,15 +62,16 @@ class Manager(StringIO,Readable):
         """ shows available listmode files (.mdat) in a directory on the remote server.
               files("~")  returns available files in the home directory
         """
+        # pylint: disable=C:len-as-condition
         if not len(argv):
-             print("argument missing:")
-             print("specify directory to search.")
-             print("no action taken.")
-             return []
+            print("argument missing:")
+            print("specify directory to search.")
+            print("no action taken.")
+            return []
         if len(argv) > 1:
-             print("too many arguments:")
-             print("no action taken.")
-             return []
+            print("too many arguments:")
+            print("no action taken.")
+            return []
         return self.internCommunicate("FilesInDirectory",argv[0])
 
 
@@ -73,15 +81,16 @@ class Manager(StringIO,Readable):
              returns current playlist.
         """
         toremove = ''
+        # pylint: disable=C:len-as-condition
         if not len(argv):
-             print("argument missing:")
-             print("specify file to remove from playlist.")
+            print("argument missing:")
+            print("specify file to remove from playlist.")
         if len(argv) > 1:
-             print("too many arguments:")
-             print("no action taken.")
-             return []
+            print("too many arguments:")
+            print("no action taken.")
+            return []
         if len(argv) == 1:
-             toremove = argv[0]
+            toremove = argv[0]
         return self.internCommunicate("RemoveFile",toremove)
 
     @usermethod
@@ -91,10 +100,10 @@ class Manager(StringIO,Readable):
         """
         toadd = ''
         if len(argv) > 1:
-             print("too many arguments:")
-             print("no action taken.")
-             return []
+            print("too many arguments:")
+            print("no action taken.")
+            return []
         if len(argv) == 1:
-             toadd = argv[0]
+            toadd = argv[0]
         return self.internCommunicate("AddFile",toadd)
 

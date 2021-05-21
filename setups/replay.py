@@ -1,5 +1,6 @@
+# pylint: disable=C:invalid-name
 description = 'listmode replay'
-
+# pylint: disable=C:invalid-name
 group = 'basic'
 
 includes = ['listmode']

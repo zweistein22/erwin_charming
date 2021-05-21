@@ -1,5 +1,5 @@
 import nicos_mlz.erwin_charming.nicospath as nicospath
-
+# pylint: disable=C:invalid-name
 description = 'listmode replay'
 group = 'lowlevel'
 

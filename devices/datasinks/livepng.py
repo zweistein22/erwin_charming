@@ -1,9 +1,9 @@
 
-
+# pylint: disable=wildcard-import
 from nicos.devices.datasinks.livepng import *
 
 class  PNGLiveFileSinkHandlerF(PNGLiveFileSinkHandler):
-      def _writeData(self, data):
+    def _writeData(self, data):
         image = np.asarray(data)
         max_pixel = image.max()
         if self.sink.log10:
@@ -50,6 +50,7 @@ class  PNGLiveFileSinkHandlerF(PNGLiveFileSinkHandler):
             img.thumbnail((self.sink.size, self.sink.size),
                       PIL.Image.ANTIALIAS)
             img.save(self.sink.filename)
+        # pylint: disable=broad-except
         except Exception:
             self.log.warning('could not save live PNG', exc=1)
         self._last_saved = currenttime()

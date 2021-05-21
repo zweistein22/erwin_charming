@@ -25,9 +25,11 @@ class Image(CharmImageChannel):
          'compare2': Param('compare2',type=str),
     }
 
-
+    # pylint: disable=C:invalid-name
     def doInit(self, mode):
         pass
+
+    # pylint: disable=C:invalid-name
     def doShutdown(self):
         pass
 

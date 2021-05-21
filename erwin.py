@@ -29,5 +29,5 @@ def main():
 
 
 def run():
-    sys.exit(main())
+    return sys.exit(main())
 

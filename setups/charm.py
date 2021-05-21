@@ -1,6 +1,8 @@
 import nicos_mlz.erwin_charming.nicospath as nicospath
 
+# pylint: disable=C:invalid-name
 description = 'charm detector'
+# pylint: disable=C;invalid-name
 group = 'lowlevel'
 
 

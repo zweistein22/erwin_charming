@@ -30,7 +30,8 @@ class CharmPowerSupply(StringIO,Readable):
 
 
 
-
+    # pylint: disable=unused-argument
+    # pylint: disable=C:invalid-name
     def doInit(self, mode):
         n_items = 0
         x = super().status()
@@ -47,6 +48,7 @@ class CharmPowerSupply(StringIO,Readable):
             self._setROParam('transitions',availabletransitions)
         print(self.transitions)
 
+    # pylint: disable=C:invalid-name
     def doShutdown(self):
         pass
 
@@ -57,7 +59,7 @@ class CharmPowerSupply(StringIO,Readable):
         return sv[1]
 
 
-
+    # pylint: disable=invalid-name
     def status_value(self,s1):
         val = ''
         sta = ''
@@ -78,7 +80,8 @@ class CharmPowerSupply(StringIO,Readable):
         applies a transition from the 'transitions' parameter.
         Function argument is index to item in the list.
         """
-        if not len(argv):
+
+        if len(argv) == 0:
             index = -1
         else:
             index = argv[0]

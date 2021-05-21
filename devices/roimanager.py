@@ -25,9 +25,11 @@ class RoiManager(StringIO,Readable):
     parameter_overrides = {
         'pollinterval': Override(default=5),  # every 5 seconds
     }
-
+    # pylint: disable=C:invalid-name
     def doInit(self, mode):
         pass
+
+    # pylint: disable=C:invalid-name
     def doShutdown(self):
         pass
 
@@ -42,7 +44,7 @@ class RoiManager(StringIO,Readable):
             cmds.append(cmd)
         return  self.multiCommunicate((delays,cmds))
 
-
+    # pylint: disable=unused-argument
     def read(self, maxage=0):
 
         rois = self.roidata()
@@ -60,10 +62,11 @@ class RoiManager(StringIO,Readable):
         # not put in the cache by Tango
         return msg
 
+    # pylint: disable=C:invalid-name
     def doRead(self, maxage=0):
         return self.read(maxage)
 
-
+    # pylint: disable=R:inconsistent-return-statements
     @usermethod
     def roi(self,*argv):
         """ read or write roi,  read: 'ROI0' .
@@ -71,12 +74,14 @@ class RoiManager(StringIO,Readable):
         """
         index = -1
         roidata = self.roidata()
-        if not len(argv):
+
+        if len(argv) == 0:
             print('available:')
             for rd in roidata:
                 print(rd)
             return ''
-        if len(argv):
+
+        if len(argv) > 0:
             tok = argv[0].split(':')
             if tok[0].startswith('ROI'):
                 istr = tok[0][3:].strip()
@@ -86,12 +91,11 @@ class RoiManager(StringIO,Readable):
                 maxindex = maxindex + 1
 
             if index >= maxindex or index < 0:
-
-                  print('index out of range. No action taken.')
-                  print('available:')
-                  for rd in roidata:
-                      print(rd)
-                  return ''
+                print('index out of range. No action taken.')
+                print('available:')
+                for rd in roidata:
+                    print(rd)
+                return ''
 
             if len(tok) < 2:
 

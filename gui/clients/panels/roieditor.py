@@ -15,11 +15,12 @@ import cv2 as cv
 import numpy as np
 import json
 import copy
-
+# pylint: disable=C:invalid-name
 win = None
 
 class Window(QWidget):
     def __init__(self, client, ldevname):
+        # pylint: disable=super-with-arguments
         super(Window, self).__init__()
         parent = Path(__file__).resolve().parent
         uipath = parent.joinpath('roieditor.ui')
@@ -34,6 +35,7 @@ class Window(QWidget):
         self.filter1.setChecked(True)
         self.zoom = self.bZoom.isChecked()
         self.noredrawblack = False
+        # pylint: disable=invalid-name
         self.tf = QTextCharFormat()
         self.polylist = []
         self.polylistindex = len(self.polylist)
@@ -49,9 +51,12 @@ class Window(QWidget):
 
         self.on_pollData()
         #self.resize(rv[0],rv[1])
+    # pylint: disable=C:invalid-name
     def closeEvent(self, event):
         self.deleteLater()
         event.accept()
+        # pylint: disable=C:invalid-name
+        # pylint: disable=W:global-statement
         global win
         win = None
 
@@ -138,7 +143,7 @@ class Window(QWidget):
         self.noredrawblack = False
         self.wktText.update()
 
-
+    # pylint: disable=unused-argument
     def paintEvent(self, event):
         img = self.image
         self.zoom = self.bZoom.isChecked()
@@ -177,10 +182,9 @@ class Window(QWidget):
         if event.key() == Qt.Key_Escape:
             if self.ineditroi is True:
                 if self.polylistindex > 1:
-                     arg = 'ROI' + str(self.polylistindex - 1) + ':'
-                     jcurwkt = self.client.eval(self.ldevname + ".roi('" + arg + "')")
-                     self.removePolygon(self.polylistindex - 1)
-
+                    arg = 'ROI' + str(self.polylistindex - 1) + ':'
+                    jcurwkt = self.client.eval(self.ldevname + ".roi('" + arg + "')")
+                    self.removePolygon(self.polylistindex - 1)
             #self.wktText.setPlainText("")
             self.ineditroi = False
 
@@ -189,6 +193,7 @@ class Window(QWidget):
         if self.ineditroi:
             if event.button() == Qt.LeftButton:
                 mpos = self.image_frame.mapFromParent(event.pos())
+                # pylint: disable=invalid-name
                 zf = 1
                 if self.zoom:
                     mpos /= 2

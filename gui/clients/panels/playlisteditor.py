@@ -12,13 +12,14 @@ from nicos.guisupport.qt import Qt, QPen, uic, QImage, QTextCharFormat, QPainter
 from pathlib import Path
 import json
 import copy
-
+# pylint: disable=C:invalid-name
 win = None
 
 
 
 class Window(QWidget):
     def __init__(self, client, ldevname):
+        # pylint: disable=super-with-arguments
         super(Window, self).__init__()
         parent = Path(__file__).resolve().parent
         uipath = parent.joinpath('playlisteditor.ui')
@@ -34,17 +35,22 @@ class Window(QWidget):
         self.add_clicked()
         #self.resize(rv[0],rv[1])
 
+    # pylint: disable=C:invalid-name
     def closeEvent(self, event):
         self.deleteLater()
         event.accept()
+        # pylint: disable=C:invalid-name
+        # pylint: disable=W:global-statement
         global win
         win = None
 
+    # pylint: disable=C:invalid-name
     def addlist(self, li):
         if li is not None:
             for i in li:
                 self.playlist.clear()
                 li2 = self.client.eval(self.ldevname+".addfile('"+i+"')")
+                # pylint: disable=W:eval-used
                 pyli2 = eval(li2)
                 self.playlist.addItems(pyli2)
 

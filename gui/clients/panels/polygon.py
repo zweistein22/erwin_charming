@@ -12,6 +12,8 @@ from nicos.guisupport.qt import QPoint
 class Polygon():
     def __init__(self):
         self.outer = list()
+
+    # pylint: disable=C:invalid-name
     def readWKT(self, astr):
         try:
             stp = "POLYGON"
@@ -26,10 +28,12 @@ class Polygon():
                 p = QPoint(int(strxy[0]), int(strxy[1]))
                 tmpouter.append(p)
             self.outer = tmpouter
+        # pylint: disable=broad-except
         except Exception:
             pass
             #print("Error reading Polygon from : "+str)
 
+    # pylint: disable=C:invalid-name
     def WKT(self):
         wkt = "POLYGON(("
         for xy in self.outer:
@@ -41,6 +45,7 @@ class Polygon():
         wkt += "),())"
         return wkt
 
+    # pylint: disable=C:invalid-name
     def addPoint(self, val):
         self.outer.append(val)
 

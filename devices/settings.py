@@ -20,9 +20,11 @@ class Settings(StringIO,Readable):
 
 
 
-
+    # pylint: disable=C:invalid-name
     def doInit(self, mode):
         pass
+
+    # pylint: disable=C:invalid-name
     def doShutdown(self):
         pass
 
@@ -37,7 +39,7 @@ class Settings(StringIO,Readable):
             cmds.append(cmd)
         return  self.multiCommunicate((delays,cmds))
 
-
+    # pylint: disable=unused-argument
     def read(self, maxage=0):
 
         rois = self.available()
@@ -53,10 +55,11 @@ class Settings(StringIO,Readable):
         # not put in the cache by Tango
         return msg
 
+    # pylint: disable=C:invalid-name
     def doRead(self, maxage=0):
         return self.read(maxage)
 
-
+    # pylint: disable=R:inconsistent-return-statements
     @usermethod
     def setting(self,*argv):
         """ read or write setting,  read: '0' or 'settingname'.
@@ -64,28 +67,28 @@ class Settings(StringIO,Readable):
         """
         index = -1
         roidata = self.available()
-        if not len(argv):
+        if len(argv) == 0:
             print('available:')
             for rd in roidata:
                 print(rd)
             return ''
-        if len(argv):
+        if len(argv) > 0:
             tok = argv[0].split(':')
             for  rd in roidata:
-                 d = {}
-                 d = json.loads(rd)
-                 for b in d.items():
-                     if b[0] == tok[0]:
-                         if len(tok) > 1:
-                             #sloppyness json true/false and python True/False
-                             if tok[1] == 'true':
-                                 tok[1] = 'True'
-                             if tok[1] == 'false':
-                                 tok[1] = 'False'
-                             cmd = tok[0] + ":" + tok[1]
-                             return self.communicate(cmd)
+                d = {}
+                d = json.loads(rd)
+                for b in d.items():
+                    if b[0] == tok[0]:
+                        if len(tok) > 1:
+                            #sloppyness json true/false and python True/False
+                            if tok[1] == 'true':
+                                tok[1] = 'True'
+                            if tok[1] == 'false':
+                                tok[1] = 'False'
+                            cmd = tok[0] + ":" + tok[1]
+                            return self.communicate(cmd)
 
-                     return rd
-                     #return b
+                    return rd
+                    #return b
 
 
